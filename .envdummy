@@ -1,0 +1,7 @@
+MONGO_URI=
+JWT_SECRET=
+NODE_ENV =development
+MAILTRAP_TOKEN=
+MAILTRAP_ENDPOINT=https://send.api.mailtrap.io/
+
+CLIENT_URL=http://localhost:5173
