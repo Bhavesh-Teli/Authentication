@@ -2,9 +2,13 @@
   "name": "authorization",
   "version": "1.0.0",
   "type": "module",
-  "main": "Backend/index.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "nodemon Backend/index.js"
+    "dev": "nodemon index.js",
+    "docker:dev": "docker-compose -f docker-compose.dev.yml up --build",
+    "docker:prod": "docker-compose up --build",
+    "docker:down:dev": "docker-compose -f docker-compose.dev.yml down",
+    "docker:down:prod": "docker-compose down"
   },
   "keywords": [],
   "author": "",
