@@ -1,10 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const API_URL =
-  import.meta.env.MODE === "development"
-    ? "http://localhost:3000/api/auth"
-    : "/api/auth";
+const API_URL = import.meta.env.VITE_API_URL;
 axios.defaults.withCredentials = true;
 export const useAuthStore = create((set) => ({
   user: null,
@@ -106,30 +103,30 @@ export const useAuthStore = create((set) => ({
       throw error;
     }
   },
-  forgotPassword: async (email)=>{
-    set({isLoading:true ,error:null});
+  forgotPassword: async (email) => {
+    set({ isLoading: true, error: null });
     try {
-        const response = await axios.post(`${API_URL}/forgot-password`,{email});
-        set({ message: response.data.message, isLoading: false });
+      const response = await axios.post(`${API_URL}/forgot-password`, { email });
+      set({ message: response.data.message, isLoading: false });
     } catch (error) {
-        set({
-            isLoading: false,
-            error: error.response.data.message || "Error sending reset password email",
-        });
-        throw error;
+      set({
+        isLoading: false,
+        error: error.response.data.message || "Error sending reset password email",
+      });
+      throw error;
     }
   },
   resetPassword: async (token, password) => {
     set({ isLoading: true, error: null });
     try {
-        const response = await axios.post(`${API_URL}/reset-password/${token}`, { password });
-        set({ message: response.data.message, isLoading: false });
+      const response = await axios.post(`${API_URL}/reset-password/${token}`, { password });
+      set({ message: response.data.message, isLoading: false });
     } catch (error) {
-        set({
-            isLoading: false,
-            error: error.response.data.message || "Error resetting password",
-        });
-        throw error;
+      set({
+        isLoading: false,
+        error: error.response.data.message || "Error resetting password",
+      });
+      throw error;
     }
-},
+  },
 }));

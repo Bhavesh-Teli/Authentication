@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5000;
 // Configure CORS to be more flexible for Docker environments
 const corsOptions = {
   origin: [
-    "http://localhost:5173",
+    process.env.CLIENT_URL,
     "http://localhost:3000",
     "http://frontend:3000", // For Docker container communication
     "http://127.0.0.1:5173",
@@ -27,6 +27,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
+app.get("/",(req,res)=>{
+  res.send("App is Running");
+})
 
 connectionDb()
   .then(() => {
